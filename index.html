@@ -31,5 +31,22 @@
   <footer>
     <p>Proyecto en equipo - UI por Developer 1</p>
   </footer>
+  
+  <script>
+const btn = document.getElementById("btn-actividad");
+const actividadTexto = document.getElementById("actividad-texto");
+
+btn.addEventListener("click", async () => {
+    actividadTexto.textContent = "Cargando... ⏳";
+    try {
+        const response = await fetch("/actividad");
+        const data = await response.json();
+        actividadTexto.textContent = data.actividad;
+    } catch (error) {
+        actividadTexto.textContent = "No se pudo cargar la actividad 😢";
+        console.error(error);
+    }
+});
+</script>
 </body>
 </html>
