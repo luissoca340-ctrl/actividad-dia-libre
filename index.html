@@ -1,35 +1,35 @@
-<!-- Cambio de prueba para Pull Request -->
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Actividad del día libre</title>
-  <link rel="stylesheet" href="styles.css">
+<main>
+  <!-- Sección de filtros -->
+  <section id="filtros">
+    <h2>Elige el tipo de actividad</h2>
+    <label for="tipo">Tipo de actividad:</label>
+    <select id="tipo" name="tipo">
+      <option value="">Aleatorio</option>
+      <option value="education">Educativa</option>
+      <option value="recreational">Recreativa</option>
+      <option value="social">Social</option>
+      <option value="charity">Caridad</option>
+      <option value="cooking">Cocina</option>
+      <option value="relaxation">Relajación</option>
+      <option value="music">Música</option>
+      <option value="busywork">Ocupación</option>
+    </select>
 
-</head>
-<body>
-  <header>
-    <h1>Actividad del día libre</h1>
-  </header>
+    <button id="btn-actividad">Mostrar actividad</button>
+  </section>
 
-  <main>
-    <section id="actividad">
-      <h2>Actividad</h2>
-      <p id="actividad-texto">Aquí aparecerá la actividad...</p>
-      <button id="btn-actividad">Mostrar actividad</button>
-    </section>
+  <!-- Resultado -->
+  <section id="actividad">
+    <h2>Actividad sugerida</h2>
+    <p id="actividad-texto">Aquí aparecerá la actividad...</p>
+  </section>
 
-    <section id="historial">
-      <h2>Historial</h2>
-      <ul id="historial-lista">
-        <li>Ejemplo de actividad previa</li>
-      </ul>
-    </section>
-  </main>
+  <!-- Historial -->
+  <section id="historial">
+    <h2>Historial</h2>
+    <ul id="historial-lista">
+      <li>Ejemplo de actividad previa</li>
+    </ul>
+  </section>
+</main>
 
-  <footer>
-    <p>Proyecto en equipo - UI por Developer 1</p>
-  </footer>
-</body>
-</html>
