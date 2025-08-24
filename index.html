@@ -1,4 +1,3 @@
-<!-- Cambio de prueba para Pull Request -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actividad del día libre</title>
   <link rel="stylesheet" href="styles.css">
-
 </head>
 <body>
   <header>
@@ -14,12 +12,32 @@
   </header>
 
   <main>
-    <section id="actividad">
-      <h2>Actividad</h2>
-      <p id="actividad-texto">Aquí aparecerá la actividad...</p>
+    <!-- Sección de filtros -->
+    <section id="filtros">
+      <h2>Elige el tipo de actividad</h2>
+      <label for="tipo">Tipo de actividad:</label>
+      <select id="tipo" name="tipo">
+        <option value="">Aleatorio</option>
+        <option value="education">Educativa</option>
+        <option value="recreational">Recreativa</option>
+        <option value="social">Social</option>
+        <option value="charity">Caridad</option>
+        <option value="cooking">Cocina</option>
+        <option value="relaxation">Relajación</option>
+        <option value="music">Música</option>
+        <option value="busywork">Ocupación</option>
+      </select>
+
       <button id="btn-actividad">Mostrar actividad</button>
     </section>
 
+    <!-- Resultado -->
+    <section id="actividad">
+      <h2>Actividad sugerida</h2>
+      <p id="actividad-texto">Aquí aparecerá la actividad...</p>
+    </section>
+
+    <!-- Historial -->
     <section id="historial">
       <h2>Historial</h2>
       <ul id="historial-lista">
@@ -29,7 +47,8 @@
   </main>
 
   <footer>
-    <p>Proyecto en equipo - UI por Developer 1</p>
+    <p>Proyecto integrador</p>
   </footer>
 </body>
 </html>
+
