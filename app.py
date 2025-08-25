@@ -3,8 +3,8 @@ import requests
 import os
 from deep_translator import GoogleTranslator  #*** USAMOS deep-translator
  
-carpeta_actual = os.path.dirname(os.path.abspath(_file_))
-app = Flask(_name_, template_folder=carpeta_actual)
+carpeta_actual = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder=carpeta_actual)
  
 historial_actividades = []
  
@@ -56,5 +56,5 @@ def obtener_actividad():
 def ver_historial():
     return {"historial": historial_actividades}
  
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
