@@ -1,54 +1,116 @@
-<!-- Cambio de prueba para Pull Request -->
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Actividad del día libre</title>
-  <link rel="stylesheet" href="styles.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad del día libre</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Actividad del día libre</h1>
-  </header>
-
-  <main>
-    <section id="actividad">
-      <h2>Actividad</h2>
-      <p id="actividad-texto">Aquí aparecerá la actividad...</p>
-      <button id="btn-actividad">Mostrar actividad</button>
-      <input>
-      <input>TIPO</input>
-    </section>
-
-    <section id="historial">
-      <h2>Historial</h2>
-      <ul id="historial-lista">
-        <li>Ejemplo de actividad previa</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Proyecto en equipo - UI por Developer 1</p>
-  </footer>
-  
-  <script>
-const btn = document.getElementById("btn-actividad");
-const actividadTexto = document.getElementById("actividad-texto");
-
-btn.addEventListener("click", async () => {
-    actividadTexto.textContent = "Cargando... ⏳";
-    try {
-        const response = await fetch("/actividad");
-        const data = await response.json();
-        actividadTexto.textContent = data.actividad;
-    } catch (error) {
-        actividadTexto.textContent = "No se pudo cargar la actividad 😢";
-        console.error(error);
-    }
-});
-</script>
+    <header>
+        <h1>Actividad del día libre</h1>
+    </header>
+ 
+    <main>  
+        <!-- ======================
+             Sección de filtros
+             ====================== -->
+        <section id="filtros">
+            <h2>Elige el tipo de actividad</h2>
+ 
+            <label for="tipo">Tipo de actividad:</label>
+            <select id="tipo" name="tipo">
+                <option value="">Aleatorio</option>
+                <option value="education">Educativa</option>
+                <option value="recreational">Recreativa</option>
+                <option value="social">Social</option>
+                <option value="charity">Caridad</option>
+                <option value="cooking">Cocina</option>
+                <option value="relaxation">Relajación</option>
+                <option value="music">Música</option>
+                <option value="busywork">Ocupación</option>
+            </select>
+ 
+            <button id="btn-actividad">Mostrar actividad</button>
+        </section>
+ 
+        <!-- ======================
+             Sección de actividad
+             ====================== -->
+        <section id="actividad">
+            <h2>Actividad</h2>
+            <p id="actividad-texto">Aquí aparecerá la actividad...</p>
+        </section>
+ 
+        <!-- ======================
+             Sección de historial
+             ====================== -->
+        <section id="historial">
+            <h2>Historial</h2>
+            <ul id="historial-lista">
+                <li>Ejemplo de actividad previa</li> <!-- Ejemplo inicial -->
+            </ul>
+        </section>
+    </main>
+ 
+    <footer>
+        <p>Proyecto en equipo - UI por Developer 1</p>
+    </footer>
+ 
+    <!-- ======================
+         Lógica con JavaScript
+         ====================== -->
+    <script>
+        // Seleccionamos elementos del DOM
+        const btn = document.getElementById("btn-actividad");
+        const actividadTexto = document.getElementById("actividad-texto");
+        const historialLista = document.getElementById("historial-lista");
+        const tipoSelect = document.getElementById("tipo"); // Dropdown de tipo
+ 
+        // Función para cargar el historial desde el backend
+        async function cargarHistorial() {
+            try {
+                const response = await fetch("/historial");
+                const data = await response.json();
+ 
+                // Limpiamos la lista antes de llenarla
+                historialLista.innerHTML = "";
+ 
+                // Recorremos el historial recibido y lo mostramos
+                data.historial.forEach(act => {
+                    const li = document.createElement("li"); // Creamos un item
+                    li.textContent = act;
+                    historialLista.appendChild(li); // Lo agregamos a la lista
+                });
+            } catch (error) {
+                console.error("Error al cargar historial:", error);
+            }
+        }
+ 
+        // Al hacer clic en el botón, pedimos una nueva actividad
+        btn.addEventListener("click", async () => {
+            actividadTexto.textContent = "Cargando... ⏳"; // Mensaje mientras carga
+ 
+            const tipo = tipoSelect.value; // Obtenemos el tipo seleccionado
+            try {
+                // Enviamos el tipo como query string
+                const response = await fetch(`/actividad${tipo ? '?tipo=' + tipo : ''}`);
+                const data = await response.json();
+ 
+                // Mostramos la actividad en pantalla
+                actividadTexto.textContent = data.actividad;
+ 
+                // Actualizamos el historial después de obtener la actividad
+                await cargarHistorial();
+            } catch (error) {
+                actividadTexto.textContent = "No se pudo cargar la actividad 😢";
+                console.error(error);
+            }
+        });
+ 
+        // Al cargar la página, mostramos el historial automáticamente
+        cargarHistorial();
+    </script>
 </body>
 </html>
